@@ -19,6 +19,7 @@ public class AustrelianTraffic  implements CentralTraffic, UnitedStatesTraffic {
 
     public void walkSymbol() {
         System.out.println("hand Signal on please walk");
+        System.out.println("Watach both side before crossing the road");
     }
     @Override
     public void greenGo() {

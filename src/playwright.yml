@@ -1,0 +1,31 @@
+name: Playwright Tests
+on :
+  push:
+    branches: ["main"]
+  pull request:
+    branches : ["main"]
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: [self-hosted]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.13.1'
+        cache: 'pip'
+    - name: Install dependencies
+      run: pip install -r requirement.txt
+    - name: Install Playwright browser
+      run: playwright install --with-deps
+    - name: Run Playwright tests
+      run: pytest
+    - uses: actions/upload-artifacts@v3
+      if: always()
+      with:
+       name: playwright0report
+       path: playwright-report/
+       retention-days: 30
+
+
